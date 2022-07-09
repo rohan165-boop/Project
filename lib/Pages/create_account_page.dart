@@ -10,6 +10,8 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> {
   bool _isPressed = false;
+  bool isObscure = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +83,14 @@ class _CreateAccountState extends State<CreateAccount> {
                  Padding(
                   padding:const EdgeInsets.only(top: 430, left: 35, right: 35 ),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    validator: (String? value) {
+                      if (value == null || value.length<10 ) {
+                        return "Please enter a valid number.";
+                      } else {
+                        return null;
+                      }
+                    },
                   decoration:const InputDecoration(
                     hintText: "Phone Number",
                     labelText: "Phone ",
@@ -89,6 +99,9 @@ class _CreateAccountState extends State<CreateAccount> {
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
+                    prefix: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Text("(+977)", style: TextStyle(fontSize: 20),),),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(25),),
                       borderSide: BorderSide(color: Colors.white)
@@ -96,7 +109,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(25),),
                     borderSide: BorderSide(color: Colors.black) 
-                    )
+                    ),
                   ) ,
                   
               ),
@@ -105,9 +118,18 @@ class _CreateAccountState extends State<CreateAccount> {
                 Padding(
                   padding:const EdgeInsets.only(top: 510, left: 35, right: 35 ),
                   child: TextFormField(
+                    obscureText:  isObscure,
+                    validator: (String? value) {
+                      if (value == null|| value.length <8 ) {
+                        return "password must be greater than 8 character";
+                      } else {
+                        return null;
+                      } 
+                    },
                   decoration:const InputDecoration(
                     hintText: "Password",
                     labelText: "Password ",
+                    prefixIcon: Icon(Icons.fingerprint),
                     labelStyle: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -129,19 +151,41 @@ class _CreateAccountState extends State<CreateAccount> {
                 Padding(
                   padding:const EdgeInsets.only(top: 590, left: 35, right: 35 ),
                   child: TextFormField(
-                  decoration:const InputDecoration(
+                    obscureText:  isObscure,
+                    validator: (String? value) {
+                      if (value == null|| value.length <8 ) {
+                        return "password must be greater than 8 character";
+                      } else {
+                        return null;
+                      } 
+                    },
+                  decoration: InputDecoration(
                     hintText: "Re-enter Password",
                     labelText: "Re-enter Password ",
-                    labelStyle: TextStyle(
+                    prefixIcon:const Icon(Icons.fingerprint),
+                    labelStyle:const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
-                    enabledBorder: OutlineInputBorder(
+                    suffixIcon: GestureDetector(
+                      child:const Icon(Icons.visibility_off),
+                      onLongPressStart: (val) {
+                        setState(() {
+                          isObscure = false;
+                        });
+                      },
+                      onLongPressEnd: (val) {
+                        setState(() {
+                          isObscure = true;
+                        });
+                      },
+                    ),
+                    enabledBorder:const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(25),),
                       borderSide: BorderSide(color: Colors.white)
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder:const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(25),),
                     borderSide: BorderSide(color: Colors.black) 
                     )
@@ -158,7 +202,21 @@ class _CreateAccountState extends State<CreateAccount> {
                     width: 120,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(50)
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: [
+                        const BoxShadow(
+                          color: Colors.white,
+                          offset: Offset(-6, -6),
+                          blurRadius: 15,
+                          spreadRadius: 1,
+                        ),
+                        BoxShadow(
+                          color: Colors.grey.shade700,
+                          offset:const Offset(6, 6),
+                          blurRadius: 15,
+                          spreadRadius: 1,
+                        )
+                      ]
                     ),
                     child:const Text("Sign In",
                     style: TextStyle(

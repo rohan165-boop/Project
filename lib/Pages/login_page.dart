@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rohan/Pages/home_page.dart';
 import 'package:rohan/constants/image_constant.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,6 +11,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isPressed = false;
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +84,15 @@ class _LoginPageState extends State<LoginPage> {
                  Padding(
                   padding:const EdgeInsets.only(top: 450, left: 35, right: 35 ),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    maxLength: 10,
+                    validator: (String? value) {
+                      if (value == null || value.length<10) {
+                        return "Please enter a valid number.";
+                      } else {
+                        return null;
+                      }
+                    },
                   decoration:const InputDecoration(
                     hintText: "Phone Number",
                     labelText: "Phone ",
@@ -109,19 +120,43 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding:const EdgeInsets.only(top: 550, left: 35, right: 35 ),
                   child: TextFormField(
-                  decoration:const InputDecoration(
+                    obscureText: isObscure,
+                    validator: (String? value) {
+                      if( value == null || value.length<8 ){
+                        return "Please Enter your Password";
+                      } else if (value.length<8) {
+                        return "Password must be greter than 8 character.";
+                      } else {
+                        return null;
+                      }
+                    },
+                  decoration: InputDecoration(
                     hintText: "Password",
                     labelText: "Password ",
-                    labelStyle: TextStyle(
+                    prefixIcon:const Icon(Icons.fingerprint),
+                    suffixIcon: GestureDetector(
+                      child:const Icon(Icons.visibility_off),
+                      onLongPressStart: (val) {
+                        setState(() {
+                          isObscure = false;
+                        });
+                      },
+                      onLongPressEnd: (val) {
+                        setState(() {
+                          isObscure = true;
+                        });
+                      },
+                       ),
+                    labelStyle:const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder:const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(25),),
                       borderSide: BorderSide(color: Colors.white)
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder:const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(25),),
                     borderSide: BorderSide(color: Colors.black) 
                     )
@@ -132,20 +167,42 @@ class _LoginPageState extends State<LoginPage> {
 
                 Padding(
                   padding:const EdgeInsets.only(top: 650, left: 130),
-                  child: Container(
-                    padding:const EdgeInsets.only(left: 30, top: 8),
-                    height: 50,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50)
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(context, 
+                        MaterialPageRoute(builder: (context) =>const HomePage() ));
+                      });
+                    },
+                    child: Container(
+                      padding:const EdgeInsets.only(left: 30, top: 8),
+                      height: 50,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
+                        boxShadow: [
+                          const BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-6, -6),
+                            blurRadius: 15,
+                            spreadRadius: 1,
+                          ),
+                          BoxShadow(
+                            color: Colors.grey.shade700,
+                            offset:const Offset(6, 6),
+                            blurRadius: 15,
+                            spreadRadius: 1,
+                          )
+                        ]
+                      ),
+                      child:const Text("Login",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),),
                     ),
-                    child:const Text("Login",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),),
                   ),
                   )
           ],
