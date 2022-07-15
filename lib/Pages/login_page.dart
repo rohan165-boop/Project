@@ -10,6 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   bool _isPressed = false;
   bool isObscure = true;
 
@@ -84,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                  Padding(
                   padding:const EdgeInsets.only(top: 450, left: 35, right: 35 ),
                   child: TextFormField(
+                    controller: phoneController,
                     keyboardType: TextInputType.number,
                     maxLength: 10,
                     validator: (String? value) {
@@ -120,6 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding:const EdgeInsets.only(top: 550, left: 35, right: 35 ),
                   child: TextFormField(
+                    controller: passwordController,
                     obscureText: isObscure,
                     validator: (String? value) {
                       if( value == null || value.length<8 ){

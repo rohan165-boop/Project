@@ -38,7 +38,6 @@ class _HomePageState extends State<HomePage> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Colors.grey.shade200,
         body: page[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.lightGreenAccent,

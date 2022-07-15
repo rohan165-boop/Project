@@ -9,6 +9,8 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   bool _isPressed = false;
   bool isObscure = true;
 
@@ -83,6 +85,7 @@ class _CreateAccountState extends State<CreateAccount> {
                  Padding(
                   padding:const EdgeInsets.only(top: 430, left: 35, right: 35 ),
                   child: TextFormField(
+                    controller: phoneController,
                     keyboardType: TextInputType.number,
                     validator: (String? value) {
                       if (value == null || value.length<10 ) {
@@ -118,6 +121,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 Padding(
                   padding:const EdgeInsets.only(top: 510, left: 35, right: 35 ),
                   child: TextFormField(
+                    controller: passwordController,
                     obscureText:  isObscure,
                     validator: (String? value) {
                       if (value == null|| value.length <8 ) {
@@ -151,6 +155,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 Padding(
                   padding:const EdgeInsets.only(top: 590, left: 35, right: 35 ),
                   child: TextFormField(
+                    controller: passwordController,
                     obscureText:  isObscure,
                     validator: (String? value) {
                       if (value == null|| value.length <8 ) {

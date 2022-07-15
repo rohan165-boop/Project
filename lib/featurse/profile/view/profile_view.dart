@@ -15,7 +15,6 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     final themepro = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
@@ -50,9 +49,9 @@ class _ProfileState extends State<Profile> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ListTile(
-                        title:const Text("Mode",
+                        title:const Text("Theme",
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),),
