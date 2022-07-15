@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rohan/app/dark_theme.dart';
+import 'package:rohan/featurse/profile/widgets/profile_widgets.dart';
 import 'package:rohan/provider/theme_provider.dart';
 
 class Profile extends StatefulWidget {
@@ -72,6 +73,8 @@ class _ProfileState extends State<Profile> {
           )
         ],
       ),
+
+      body: ProfileWidget(),
       
     );
   }
